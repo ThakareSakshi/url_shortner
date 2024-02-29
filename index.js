@@ -28,16 +28,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/url-shortner", (req, res) => {
-  const longUrl = req.body.longUrl;
+  const longUrl = req.body.url;
   const shortUrl = nanoid(10);
-  console.log(req.body.url);
+  console.log(req);
   
  
   const fileResponse = fs.readFileSync(path.join(__dirname,"urlmap.json"));
   console.log(fileResponse);
   const fileData = JSON.parse(fileResponse.toString());
   console.log(fileData)
-
+console.log("requiesddf",req)
   fileData[shortUrl] = longUrl;
 
   fs.writeFileSync(path.join(__dirname,"urlmap.json"), JSON.stringify(fileData));
@@ -46,6 +46,7 @@ app.post("/url-shortner", (req, res) => {
   res.json({
     succes: true,
     url: `http://localhost:5000/${shortUrl}`,
+    // https://url-shortner-0hcy.onrender.com
   });
 });
 
